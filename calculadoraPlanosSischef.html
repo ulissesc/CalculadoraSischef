@@ -8,10 +8,9 @@
 		
 				<div class="page-header">
       		<center>
-      	 		<img src="https://sischef.com/wp-content/uploads/2015/12/logo-sischef-256.png">
-        			<h1>Calculadora de planos Sischef</h1>
-
-        			<p class="lead">Calcule o custo para implantação e utilização do Sischef</p>
+      	 		<img src="https://sischef.com/wp-content/uploads/2015/12/logo-sischef-256.png" style = "width: 200px">
+        			<h1>Calculadora de Planos Sischef</h1>
+               <p class="lead">Calcule o custo para implantação e utilização do Sischef</p>
         			
        		</center>
      	 		</div>
@@ -503,37 +502,10 @@
 
 			  <div class="panel-body">
 
-			    
-
-			  <!-- MODULOS -->
-
-			   <ul class="media-list">
-
-				  <li class="media">
-
-				    <div class="media-left"> 
-
-				    	<input id="Boleto" type="checkbox" valor="19.90" horas="0" class="modulo-extra" descricao="Boleto Bancário" taxa="249,90" /> 
-
-				    </div>
-
-				    <div class="media-body">
-
-				      <h4 class="media-heading"><label for="Boleto">Boleto Bancário</label></h4>
-
-				      Adicional 19,90/mês + Taxa para homologação de R$249,90
-
-				    </div>
-
-				  </li>
-
-				</ul>
-
 
 
 				<!-- MODULOS -->
 
-				<hr>
 
 			   <ul class="media-list">
 
@@ -706,8 +678,87 @@
 			   </hr>
 
 
+			     <!-- MODULOS -->
 
-			   
+			  <hr>
+
+			   <ul class="media-list">
+
+				  <li class="media">
+
+				    <div class="media-left"> 
+
+				    	<input id="ReceitasDespesasRecorrentes" type="checkbox" valor="19.90" horas="0" class="modulo-extra" descricao="Receitas/Despesas Recorrentes" taxa="90,00" descricaoTaxa="Taxa de ativação do módulo: Receitas/Despesas" /> 
+
+				    </div>
+
+				    <div class="media-body">
+
+				      <h4 class="media-heading"><label for="ReceitasDespesasRecorrentes">Receitas/Despesas Recorrentes</label></h4>
+
+				      Adicional 19,90/mês + Taxa de implantação R$90,00
+
+				    </div>
+
+				  </li>
+
+				</ul>
+
+			   </hr>
+
+
+			   <!-- MODULOS -->
+			  
+			  <hr>
+
+				<ul class="media-list">
+
+				  <li class="media">
+
+				    <div class="media-left"> 
+
+				    	<input id="TEF" type="checkbox" valor="99.90" horas="0" class="modulo-extra" descricao="TEF" taxa="300,00" descricaoTaxa="Taxa de ativação de TEF" /> 
+
+				    </div>
+
+				    <div class="media-body">
+
+				      <h4 class="media-heading"><label for="TEF">TEF</label></h4>
+
+				      Adicional 99,90/mês + Taxa de implantação de R$300,00
+
+				    </div>
+
+				  </li>
+
+				</ul>
+
+
+			    <!-- MODULOS -->
+
+			    <hr>
+
+			   <ul class="media-list">
+
+				  <li class="media">
+
+				    <div class="media-left"> 
+
+				    	<input id="Boleto" type="checkbox" valor="19.90" horas="0" class="modulo-extra" descricao="Boleto Bancário" taxa="249,90" descricaoTaxa="Taxa de ativação de boleto" /> 
+
+				    </div>
+
+				    <div class="media-body">
+
+				      <h4 class="media-heading"><label for="Boleto">Boleto Bancário</label></h4>
+
+				      Adicional 19,90/mês + Taxa para homologação de R$249,90
+
+				    </div>
+
+				  </li>
+
+				</ul>
 
 			  </div>
 
@@ -825,13 +876,13 @@
 
     	var valorAtivacao = 350.0;
 
-    	var valorDaHora = 90.0;
+    	var valorDaHora = 110.0;
 
     	var valorPlanoBasico = parseFloat($('.plano-basico').attr('valor'));
 
     	
 
-    	var valorModulosAdicionais = 0;
+    	var valorModulosAdicionais = 0
 
     	var valorModulosExtras = 0;
 
@@ -871,6 +922,8 @@
 
 	     var descricaoModulosExtrasSelecionados = "";
 
+         var descricaoTaxasModulosExtrasSelecionados = "";
+
     	$('.modulo-extra:checked').each(function(){
 
     		console.log('Valor modulo extra ' + $(this).attr('valor'));
@@ -892,6 +945,8 @@
     			var taxa = parseFloat($(this).attr('taxa'));
 
     			taxasAdicionais += taxa;
+
+    			descricaoTaxasModulosExtrasSelecionados +="<br/>	+ "+ $(this).attr('descricaoTaxa');
 
 			}
 
@@ -923,7 +978,9 @@
 
     	if(taxasAdicionais > 0){
 
-    		texto +="<br/> + Taxa de homologação (boleto): R$ " + taxasAdicionais.toFixed(2);
+    		//texto +=" + Taxa de homologação (boleto): R$ " + taxasAdicionais.toFixed(2);
+    	  	texto+="  "+descricaoTaxasModulosExtrasSelecionados +": R$ " + taxasAdicionais.toFixed(2);
+
 
     	}
 
@@ -955,7 +1012,7 @@
 
     	//Inicio calculo plano PRO
 
-    	var valorImplantacaoPlanoPRO = 900.0;
+    	var valorImplantacaoPlanoPRO = 1100.0;
 
     	var totalHorasPRO = 9;
 
@@ -973,7 +1030,7 @@
 
     	if(taxasAdicionais > 0){
 
-    		textoplanoPRO +="<br/> + Taxa de homologação (boletos): R$ " + taxasAdicionais.toFixed(2);
+    		textoplanoPRO +="  "+descricaoTaxasModulosExtrasSelecionados +": R$ " + taxasAdicionais.toFixed(2);
 
     	}
 
@@ -1034,7 +1091,7 @@
 		//Inicio calculo plano PRO Delivery
 
 
-    	var valorImplantacaoPlanoPRODelivery = 900.0;
+    	var valorImplantacaoPlanoPRODelivery = 1100.0;
 
     	var totalHorasPRODelivery = 9;
 
@@ -1052,7 +1109,8 @@
 
     	if(taxasAdicionais > 0){
 
-    		textoplanoPRODelivery +="<br/> + Taxa de homologação (boletos): R$ " + taxasAdicionais.toFixed(2);
+    		//textoplanoPRODelivery +="<br/> + Taxa de homologação (boletos): R$ " + taxasAdicionais.toFixed(2);
+    		textoplanoPRODelivery +="  "+descricaoTaxasModulosExtrasSelecionados +": R$ " + taxasAdicionais.toFixed(2);
 
     	}
 
